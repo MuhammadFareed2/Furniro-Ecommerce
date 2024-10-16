@@ -71,10 +71,12 @@ const Home = () => {
 
     
       <div className='flex items-center justify-center'>
-        <Link to="/shop">
-          <CustomButton text="Show More" styles="flex items-center justify-center border-2 border-[#B88E2F] text-[#B88E2F] w-[200px] md:w-[245px] h-[48px] mb-12" />
-        </Link>
-      </div>
+            <CustomButton 
+                text="Show More" 
+                styles="flex items-center justify-center border-2 border-[#B88E2F] text-[#B88E2F] w-[200px] md:w-[245px] h-[48px] mb-12" 
+                to="/shop" // Set the link path here
+            />
+        </div>
 
       
       <img src={Image} alt="Footer" className='w-full object-cover mb-20' />
