@@ -25,7 +25,8 @@ const Navbar = () => {
 
            
                 <div className='flex gap-6 sm:gap-8 lg:gap-12 items-center'>
-                    <Link to="/signin">
+                    
+                    <Link to="/signup">
                         <img src={Account} alt="Account" className='h-5 sm:h-7' />
                     </Link>
                     <img src={Lens} alt="Search" className='h-5 sm:h-7' />
