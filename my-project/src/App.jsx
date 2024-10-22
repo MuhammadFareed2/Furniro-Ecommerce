@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Shop from "./pages/Shop"
 import ProductDetail from "./pages/ProductDetail"
 import Cart from "./pages/Cart"
+import CheckOut from "./pages/CheckOut"
 
 function App() {
 
@@ -23,8 +24,8 @@ function App() {
           <Route path="/signin" element={<Signin/>}/>
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckOut />} />
           <Route path='/shop/:key' element={<ProductDetail />} />
-          
 
         </Routes>
         <Footer />

@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import { Auth } from '../firebase/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleSignup = async (e) => {
         e.preventDefault();  
         try {
-            await createUserWithEmailAndPassword(Auth, email, password);
+            // Create user
+            const userCredential = await createUserWithEmailAndPassword(Auth, email, password);
+            console.log('User created:', userCredential.user);
+
+            // Automatically sign in the user
+            await signInWithEmailAndPassword(Auth, email, password);
+            console.log('User signed in:', userCredential.user);
+
+            // Redirect to home page after successful signup and sign in
+            navigate('/'); // Redirect to the home page
         } catch (error) {
             console.log(error.message);
         }
@@ -19,12 +29,8 @@ const SignUp = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-white">
             <div className="w-full max-w-md bg-white shadow-lg p-8 rounded-lg">
-               
                 <h2 className="text-3xl font-bold text-center text-[#B88E2F] mb-6">Sign Up</h2>
-
-         
                 <form onSubmit={handleSignup}>
-           
                     <div className="mb-4">
                         <label className="block text-[#B88E2F] font-semibold mb-2" htmlFor="name">Name</label>
                         <input
@@ -34,8 +40,6 @@ const SignUp = () => {
                             placeholder="Enter your name"
                         />
                     </div>
-
-               
                     <div className="mb-4">
                         <label className="block text-[#B88E2F] font-semibold mb-2" htmlFor="email">Email</label>
                         <input
@@ -48,8 +52,6 @@ const SignUp = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
-
-                    
                     <div className="mb-4">
                         <label className="block text-[#B88E2F] font-semibold mb-2" htmlFor="password">Password</label>
                         <input
@@ -62,8 +64,6 @@ const SignUp = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-
-                   
                     <button
                         type="submit"
                         className="w-full bg-[#B88E2F] text-white font-bold py-2 px-4 rounded hover:bg-opacity-90 transition duration-300"
@@ -71,10 +71,8 @@ const SignUp = () => {
                         Sign Up
                     </button>
                 </form>
-
-             
                 <p className="text-center text-sm text-gray-600 mt-6">
-                    Already have an account? <a href="/signin" className="text-[#B88E2F] font-semibold hover:underline">Sign In</a>
+                    Already have an account? <Link to="/signin" className="text-[#B88E2F] font-semibold hover:underline">Sign In</Link>
                 </p>
             </div>
         </div>
