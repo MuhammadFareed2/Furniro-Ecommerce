@@ -10,22 +10,21 @@ const Cart = () => {
   const [user, setUser] = useState(null);
   const [total, setTotal] = useState(0);
 
-  // Fetch user state and cart items on mount
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(Auth, (user) => {
       if (user) {
         setUser(user);
-        fetchCartItems(user.uid); // Fetch items if user is logged in
+        fetchCartItems(user.uid);
       } else {
         setUser(null);
-        setCartItems([]); // Clear cart if user logs out
+        setCartItems([]); 
       }
     });
 
     return () => unsubscribe();
   }, []);
 
-  // Fetch cart items from Firestore
   const fetchCartItems = async (userId) => {
     try {
       const cartRef = collection(db, 'users', userId, 'cart');
@@ -34,32 +33,30 @@ const Cart = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      setCartItems(itemsArray); // Set fetched cart items to state
+      setCartItems(itemsArray); 
     } catch (error) {
       console.error("Error fetching cart items: ", error);
     }
   };
 
-  // Remove an item from cart
   const handleRemoveItem = async (itemId) => {
     if (user) {
       try {
-        await deleteDoc(doc(db, 'users', user.uid, 'cart', itemId)); // Remove item from Firestore
-        setCartItems(prevItems => prevItems.filter(item => item.id !== itemId)); // Remove from state
+        await deleteDoc(doc(db, 'users', user.uid, 'cart', itemId));
+        setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
       } catch (error) {
         console.error("Error removing item: ", error);
       }
     }
   };
 
-  // Recalculate the total whenever cart items change
   useEffect(() => {
     const calculateTotal = () => {
       const totalPrice = cartItems.reduce((acc, item) => {
-        const product = items[item.key]; // Match the item from local items.json
-        return acc + (product?.price.currentPrice * item.quantity || 0); // Calculate total for each item
+        const product = items[item.key];
+        return acc + (product?.price.currentPrice * item.quantity || 0);
       }, 0);
-      setTotal(totalPrice); // Update total price
+      setTotal(totalPrice); 
     };
 
     calculateTotal();
@@ -72,7 +69,7 @@ const Cart = () => {
         cartItems.length > 0 ? (
           <div>
             {cartItems.map(item => {
-              const product = items[item.key]; // Get product from local JSON
+              const product = items[item.key];
               return (
                 <div key={item.id} className="flex items-center justify-between border-b py-4">
                   <div className="flex items-center">
@@ -100,14 +97,14 @@ const Cart = () => {
                 </div>
               );
             })}
-            {/* Total Price */}
+            
             <div className="mt-6 font-bold text-lg">
               Total: ${total.toFixed(2)}
             </div>
-            {/* Single Checkout Button */}
+
             <div className="mt-6">
               <Link to="/checkout">
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+                <button className="bg-[#B88E2F] text-white px-6 py-3 rounded-lg hover:bg-[#a67d25] transition duration-300">
                   Checkout
                 </button>
               </Link>
