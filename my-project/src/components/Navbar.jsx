@@ -57,8 +57,8 @@ const Navbar = () => {
                             <img src={Account} alt="Account" className='h-5 sm:h-7' />
                         </Link>
                     )}
-                    <img src={Lens} alt="Search" className='h-5 sm:h-7' />
-                    <img src={Heart} alt="Favorites" className='h-5 sm:h-7' />
+                    <img src={Lens} alt="Search" className='h-5 sm:h-7 cursor-pointer' />
+                    <img src={Heart} alt="Favorites" className='h-5 sm:h-7 cursor-pointer' />
                     <Link to="/cart">
                         <img src={Cart} alt="Cart" className='h-5 sm:h-7' />
                     </Link>

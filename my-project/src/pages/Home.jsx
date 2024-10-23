@@ -12,12 +12,10 @@ import ProductCard from '../components/ProductCard';
 const Home = () => {
   return (
     <>
-      
       <div className='flex items-center justify-center overflow-hidden w-full aspect-[1440/716]'>
         <img src={HomeImage} alt="Home" className='w-full h-full object-cover' />
       </div>
 
-      
       <div className='text-center p-6 md:p-14'>
         <h1 className='text-[24px] md:text-[32px] font-bold'>
           Browse The Range
@@ -27,13 +25,12 @@ const Home = () => {
         </p>
       </div>
 
-     
       <div className='flex flex-col md:flex-row justify-between items-center gap-6 mx-6 md:mx-[100px]'>
         <Link to='/shop' className='flex flex-col items-center'>
           <div className='w-[90%] sm:w-[381px] h-[300px] sm:h-[481px] bg-white'>
             <img src={Dining} alt="Dining" className='w-full h-full object-cover' />
           </div>
-          <h1 className='pt-5 text-xl sm:text- font-semibold'>Dining</h1>
+          <h1 className='pt-5 text-xl sm:text-2xl font-semibold'>Dining</h1>
         </Link>
 
         <Link to='/shop' className='flex flex-col items-center'>
@@ -51,8 +48,7 @@ const Home = () => {
         </Link>
       </div>
 
-  
-      <div className='flex flex-wrap justify-center md:justify-between gap-6 p-6 md:p-[102px]'>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-12 bg-white">
         {
           items.slice(0, 8).map((item, index) => (
             <ProductCard 
@@ -69,16 +65,14 @@ const Home = () => {
         }
       </div>
 
-    
       <div className='flex items-center justify-center'>
-            <CustomButton 
-                text="Show More" 
-                styles="flex items-center justify-center border-2 border-[#B88E2F] text-[#B88E2F] w-[200px] md:w-[245px] h-[48px] mb-12" 
-                to="/shop" // Set the link path here
-            />
-        </div>
+        <CustomButton 
+          text="Show More" 
+          styles="flex items-center justify-center border-2 border-[#B88E2F] text-[#B88E2F] w-[200px] md:w-[245px] h-[48px] mb-12" 
+          to="/shop" // Set the link path here
+        />
+      </div>
 
-      
       <img src={Image} alt="Footer" className='w-full object-cover mb-20' />
     </>
   );
